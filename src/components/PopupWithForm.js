@@ -3,15 +3,15 @@ import React from 'react';
 function PopupWithForm (props) {
   
     return (
-        <div className={`popup popup-${props.name}`}>
-          <div className="popup__container"></div>
+        <section className={`popup popup-${props.name}`}>
+          <div className={`popup__container ${props.popupClass}`}>
              <h2 className="popup__title">{props.title}</h2>
-              <form className="popup__form form" novalidate name={`popup-${props.name}`}>
-              <button type="submit" disabled = "false" tabindex="3" className="popup__button form__submit">Сохранить</button>
+              <form className={`popup__form form ${props.formClass}`} noValidate name={`popup-${props.name}`}>
                 {props.children}
-              </form>    
-          <button type="button" className="popup__close"></button>                
-        </div>
+              </form>  
+          </div>  
+          <button type="button" className={`popup__close popup__${props.buttonClose}`}></button>                
+        </section>
     );
 }
 

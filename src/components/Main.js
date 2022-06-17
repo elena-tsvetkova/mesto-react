@@ -2,16 +2,6 @@ import React from 'react';
 
 function Main (props) {
 
-    const [onEditProfile, setOnEditProfile] = React.useState();
-    const [onAddPlace, setOnAddPlace] = React.useState();
-    const [onEditAvatar, setOnEditAvatar] = React.useState();
-
-    function openEditAvatarPopup () {
-        setOnEditAvatar (
-            {onEditAvatar: true}
-        )
-    }
-
     return (
       <main className="main">
       <section className="profile">          
@@ -32,7 +22,7 @@ function Main (props) {
         <article className="element">
           <img src="#" alt="" className="element__image"/>
           <div className="element__header">
-            <h2 clclassNameass="element__title"></h2>
+            <h2 className="element__title"></h2>
                 <div className="element__count">
                   <button type="button" className="element__like"></button>
                   <span className="element__like-count">0</span>
