@@ -1,5 +1,6 @@
 import React from 'react';
 import api from '../utils/api';
+import Card from './Card';
 
 function Main (props) {
 
@@ -18,11 +19,8 @@ api.getUserInfo()
 
 
 api.getInitialCards()
-.then((data) => {
-  console.log('cards', data)
-})
-.catch((err) => console.log(err))
-
+  .then((data) => setCards(data))
+  .catch((err) => console.log(err))
 
 
 function openEditProfilePopup () {
@@ -36,7 +34,6 @@ function openAddPlacePopup () {
 function openEditAvatarPopup () {
   props.onEditAvatar()
 }
-
 
     return (
       <main className="main">
@@ -52,21 +49,13 @@ function openEditAvatarPopup () {
         </div>  
         <button type="button" className="profile__add-button" onClick={openAddPlacePopup}></button>
       </section>
-      <section className="elements">         
+      <section className="elements"> 
+         {
+          cards.map((card) => (
+            <Card key = {card.id} link = {card.link} name = {card.name} likes = {card.likes}/>
+          ))
+          }
       </section>
-      <template className="element-template">
-        <article className="element">
-          <img src="#" alt="" className="element__image"/>
-          <div className="element__header">
-            <h2 className="element__title"></h2>
-                <div className="element__count">
-                  <button type="button" className="element__like"></button>
-                  <span className="element__like-count">0</span>
-                </div>
-          </div>
-          <button type="button" className="element__trash"></button>
-        </article>
-      </template>
        </main>
     );
 }
