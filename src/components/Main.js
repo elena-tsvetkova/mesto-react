@@ -2,25 +2,23 @@ import React from 'react';
 import api from '../utils/api';
 import Card from './Card';
 
-function Main (props) {
 
+function Main (props) {
 const [userName, setUserName] = React.useState('Жак');
-const [userDescription, setUserDescription] = React.useState('морж');
+const [userDescription, setUserDescription] = React.useState('test');
 const [userAvatar, setUserAvatar] = React.useState('http://ya.ru');
 const [cards, setCards] = React.useState([]);
 
-api.getUserInfo()
-.then((data) => {
-  setUserName(data.name)
-  setUserDescription(data.about)
-  setUserAvatar(data.avatar)
-})
-.catch((err) => console.log(err))
-
-
-api.getInitialCards()
-  .then((data) => setCards(data))
+React.useEffect(() => {
+  api.getAllNeededData()
+  .then(([cards, userData] ) => {
+    setUserName(userData.name)
+    setUserDescription(userData.about)
+    setUserAvatar(userData.avatar)
+    setCards(cards)
+  })
   .catch((err) => console.log(err))
+}, []);
 
 
 function openEditProfilePopup () {
@@ -52,7 +50,7 @@ function openEditAvatarPopup () {
       <section className="elements"> 
          {
           cards.map((card) => (
-            <Card key = {card.id} link = {card.link} name = {card.name} likes = {card.likes}/>
+            <Card key = {card._id} link = {card.link} name = {card.name} likes = {card.likes} onCardClick={props.onCardClick}/>
           ))
           }
       </section>
