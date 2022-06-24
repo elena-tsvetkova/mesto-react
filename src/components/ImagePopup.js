@@ -1,14 +1,15 @@
-import React from 'react';
-
 function ImagePopup (props) {
-  console.log('card:', props)
-  
+    const {
+        card,
+        onClose
+    } = props
+
     return (
-      <div className={`popup ${props.card.isOpen ? 'popup_opened': ''} popup-big-image`}>
+      <div className={`popup ${card.isOpen ? 'popup_opened': ''} popup-big-image`}>
       <div className='popup-big-image__container'>
-        <img src={props.card.link} className="popup-big-image__opened" alt=""/>
-        <h2 className="popup-big-image__title">{props.card.name} </h2>
-        <button type="button" className="popup__close popup-big-image__close" onClick={props.onClose}></button>
+        <img src={card.link} className="popup-big-image__opened" alt={card.name}/>
+        <h2 className="popup-big-image__title">{card.name}</h2>
+        <button type="button" className="popup__close popup-big-image__close" onClick={onClose}></button>
       </div>        
     </div>
     );

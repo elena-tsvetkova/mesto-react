@@ -1,6 +1,9 @@
-import React from 'react';
-
 function Card (props) {
+    const {
+        name,
+        link,
+        likes
+    } = props
 
   function handleClick() {
     props.onCardClick(props);
@@ -8,12 +11,12 @@ function Card (props) {
 
     return (
       <article className="element">
-        <img src={`${props.link}`} alt="" className="element__image" onClick={handleClick}/>
+        <img src={link} alt={name} className="element__image" onClick={handleClick}/>
         <div className="element__header">
-          <h2 className="element__title">{props.name}</h2>
+          <h2 className="element__title">{name}</h2>
               <div className="element__count">
                 <button type="button" className="element__like"></button>
-                <span className="element__like-count">{props.likes.length}</span>
+                <span className="element__like-count">{likes.length}</span>
               </div>
         </div>
         <button type="button" className="element__trash"></button>
