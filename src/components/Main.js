@@ -1,7 +1,6 @@
 import {useContext} from 'react';
 import Card from './Card';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import api from "../utils/api";
 
 
 function Main(props) {
@@ -11,42 +10,17 @@ function Main(props) {
         onEditAvatar,
         onCardClick,
         cards,
-        setCards
+        onCardDelete,
+        onCardLike
     } = props
-
 
     const currentUser = useContext(CurrentUserContext);
 
-    function openEditProfilePopup() {
-        onEditProfile()
-    }
-
-    function openAddPlacePopup() {
-        onAddPlace()
-    }
-
-    function openEditAvatarPopup() {
-        onEditAvatar()
-    }
-
-    function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
-        if (isLiked) {
-            api.dislike(card._id).then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            });
-        } else {
-            api.like(card._id).then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            });
-        }
-    }
-
-    function handleCardDelete(card) {
-        api.deleteCard(card._id).then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            });
-    }
+    const openEditProfilePopup = () => onEditProfile()
+    const openAddPlacePopup = () => onAddPlace()
+    const openEditAvatarPopup = () => onEditAvatar()
+    const handleCardDelete = (card) => onCardDelete(card._id)
+    const handleCardLike = (card) => onCardLike(card)
 
     return (
         <main className="main">

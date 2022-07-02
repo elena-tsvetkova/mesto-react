@@ -25,7 +25,7 @@
       headers: this._headers,
       body: JSON.stringify({
         name: userData.name,
-        about: userData.status
+        about: userData.about
       })
     })
     .then(this._checkResponse)
@@ -80,7 +80,7 @@
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.link,
+        avatar: data.avatar,
       })
     })
     .then(this._checkResponse)

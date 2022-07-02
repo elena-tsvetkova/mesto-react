@@ -10,7 +10,6 @@ function Card(props) {
     } = props
 
     const currentUser = useContext(CurrentUserContext);
-
     const isOwn = card.owner._id === currentUser._id;
     const cardDeleteButtonClassName = `element__trash ${isOwn ? '' : 'element__trash_hidden'}`;
 
