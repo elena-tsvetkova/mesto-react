@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import PopupWithForm from './PopupWithForm';
 
 
@@ -9,21 +9,22 @@ function EditAvatarPopup(props) {
         onUpdateAvatar
     } = props
 
-    const [avatar, setAvatar] = useState('http://ya.ru');
+    const avatarRef = useRef('');
 
     useEffect(() => {
-        setAvatar('');
+        avatarRef.current = ''
     }, [isOpen]);
 
     function handleChange(evt) {
-        setAvatar(evt.target.value);
+        avatarRef.current = evt.target.value;
     }
 
     function handleSubmit(e) {
         e.preventDefault();
         onUpdateAvatar({
-            avatar: avatar,
+            avatar: avatarRef.current,
         });
+        e.target.reset()
     }
 
     return (
@@ -32,7 +33,7 @@ function EditAvatarPopup(props) {
                        buttonSubmitText='Сохранить' isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
             <input id="avatar-input" type="url" tabIndex="1" required
                    className="popup__input popup__input_type_link form__input"
-                   placeholder="Ссылка на картинку" name="link" value={avatar} onChange={handleChange}/>
+                   placeholder="Ссылка на картинку" name="link" ref={avatarRef} onChange={handleChange}/>
             <span className="form__input-error avatar-input-error"></span>
         </PopupWithForm>
     );
