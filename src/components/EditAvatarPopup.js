@@ -1,5 +1,4 @@
-import {useContext, useEffect, useState} from 'react';
-import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import {useEffect, useState} from 'react';
 import PopupWithForm from './PopupWithForm';
 
 
@@ -12,11 +11,9 @@ function EditAvatarPopup(props) {
 
     const [avatar, setAvatar] = useState('http://ya.ru');
 
-    const currentUser = useContext(CurrentUserContext);
-
     useEffect(() => {
-        setAvatar(currentUser.avatar);
-    }, [currentUser]);
+        setAvatar('');
+    }, [isOpen]);
 
     function handleChange(evt) {
         setAvatar(evt.target.value);

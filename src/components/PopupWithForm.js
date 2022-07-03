@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import {useEffect} from 'react';
 
 function PopupWithForm(props) {
     const {
@@ -15,26 +15,24 @@ function PopupWithForm(props) {
         onSubmit
     } = props
 
-     useEffect(() => {
-    if (!isOpen) return;
-    const handleEscapeClose = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-    document.addEventListener("keydown", handleEscapeClose);
-    return () => {
-      document.removeEventListener("keydown", handleEscapeClose);
-    };
-  }, [isOpen, onClose]);
+    useEffect(() => {
+        if (!isOpen) return;
+        const handleEscapeClose = (event) => {
+            if (event.key === "Escape") {
+                onClose();
+            }
+        };
+        document.addEventListener("keydown", handleEscapeClose);
+        return () => {
+            document.removeEventListener("keydown", handleEscapeClose);
+        };
+    }, [isOpen, onClose]);
 
-  const handleOverlayClose = (e) => {
-    if (e.target === e.currentTarget && isOpen) {
-      onClose();
-    }
-    return;
-  };
-
+    const handleOverlayClose = (e) => {
+        if (e.target === e.currentTarget && isOpen) {
+            onClose();
+        }
+    };
 
     return (
         <section onClick={handleOverlayClose} className={`popup ${isOpen ? 'popup_opened' : ''} popup-${name}`}>
